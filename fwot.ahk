@@ -8,6 +8,7 @@ WinActivate BlueStacks
     DailyPlanet_Mission5_path1()
     return
 
+/* Ctrl-e for d(aily planet) mission 5, path 1 */
 ^e::
     Earth_Mission5_path13()
     return
