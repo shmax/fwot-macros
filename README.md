@@ -24,6 +24,9 @@ Tired of punishing events and endless grinding? Time to level the playing field!
 5. Run Futurama: Worlds of Tomorrow (in Bluestacks)
 6. Find the full screen button in the bottom-right corner of Bluestacks and click it. This script currently only works in full screen.
 
+## Before you run a mission script:
+The Futurama game remembers the last planet you visited and the last team that you completed a battle with, and the script simply chooses the first 5 character portraits, so before you run a mission script run through it manually once to bake-in the character set and the current planet.
+
 ## To run a script:
 Have a look at this file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
 
@@ -31,5 +34,8 @@ Have a look at this file called `fwot.ahk`. Think of this file as the Menu of av
 * `Ctrl-e` for (e)arth mission 5 path 13.
 * `F1` to reload the currently running script (think of this as the stop button)
 * `Ctrl-q` to exit the script entirely (you will need to double-click to get it going again)
+
+## To add a new mission script:
+1. Copy one of the existing ones and update the `GoToNode` and `Battle` calls. To get screen coordinates, use the Window Spy utility that comes with AutoHotKey.
 
 Have fun. Pull requests are welcome, but please don't bombard me with issues. If you see something you don't like, fix it yourself and submit it.
