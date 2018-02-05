@@ -30,7 +30,7 @@ The Futurama game remembers the last planet you visited and the last team that y
 Also, make sure that your team is strong enough to easily handle the battles with no input from you. The script will automatically select the middle critter in the front row when the battle begins (for scientists), but otherwise does nothing to manage battle actions.
 
 ## To run a script:
-Have a look at this file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
+Have a look at the file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
 
 * `Ctrl-d` for (d)aily planet mission 5 path 1
 * `Ctrl-e` for (e)arth mission 5 path 13 (great for farming Gamma coins)
