@@ -8,7 +8,7 @@ WinActivate BlueStacks
 
 /*
  F1 - Stop whatever the script is doing and reload it
-/
+*/
 F1::Reload
 
 /*
