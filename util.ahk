@@ -15,7 +15,6 @@ sclick(x, y) {
 }
 
 ToSpace(){
-    MsgBox ToSpace
 	sclick(250, 990) ; click Space button
 }
 
@@ -23,9 +22,9 @@ Next(){
   sclick(1710, 1020) ; click Next button
 }
 
-/**
- * Selects the top 5 character portraits. TODO: write something dynamic
- */
+/*
+ Selects the top 5 character portraits. TODO: write something dynamic
+*/
 SelectCrew() {
     sclick(110, 280)
 	Sleep, 500
@@ -49,6 +48,7 @@ StartMission() {
 	FuelUp()
 }
 
+
 SelectMission(mission) {
 	global TopMissionY
 	global MissionHeight
@@ -71,10 +71,6 @@ SelectMission(mission) {
 		Sleep, 500
 		SelectMission(mission - tilesToMove)
 		return
-		; DragStartY = TopMissionY + (MissionsPerScreen * MissionHeight
-		; SendEvent {Click 100, 200}
-		; MouseClickDrag, Left, 350, 350, 350, 700 
-		MouseMove, 500, 500
 	}
 }
 
@@ -82,10 +78,6 @@ Return() {
 	sclick(960,900)	
 }
 
-^n::
-	res := NeedHeal()
-	MsgBox %res%
-	return
 
 NeedHeal() {
 	ImageSearch, xPos, yPos, 1050, 820, 1200, 880, *140 icons/healall.bmp
@@ -123,10 +115,6 @@ TriggerSupers() {
 	}
 }
 
-^m::
-	TriggerSupers()
-	return
-
 Fight() {
 
 	while(true) {
@@ -142,13 +130,6 @@ Fight() {
 		Sleep, 1000
 	}
 }
-
-^p::
-	WinActivate BlueStacks
-	Sleep 2000
-	MouseMove 247, 147
-	return
-
 
 GoToNode(x,y, dur){
 	elapsed := 0
@@ -232,21 +213,4 @@ DailyPlanet() {
 
 Earth() {
 	sclick(590, 530) ; click Earth
-}	
-
-F2::
-	tolerance := *50
-	ImageSearch, xPos, yPos, 430, 300, 2000, 1200, *125 icons/cashwad.bmp
-	while(ErrorLevel == 0) {
-		Sleep, 100
-		sclick(xPos + 10, yPos + 10)
-		Sleep, 50
-		ImageSearch, xPos, yPos, 430, 300, 2000, 1200, *125 icons/cashwad.bmp
-	}
-	return
-	
-^q::exitapp	
-	
-F1::Reload
-
-Return
+}

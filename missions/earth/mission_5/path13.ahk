@@ -1,7 +1,7 @@
-/**
- * Earth Mission 5, "Out of Office", path 13. Great path for farming gamma coins.
- *      Requires: Hermes 27, Scruffy 29
- */
+/*
+ Earth Mission 5, "Out of Office", path 13. Great path for farming gamma coins.
+ Requires: Hermes 27, Scruffy 29
+*/
 Earth_Mission5_path13() {
 	Loop {
 

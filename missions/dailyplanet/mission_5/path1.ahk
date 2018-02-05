@@ -1,3 +1,7 @@
+/*
+Runs the first path of the hardest mission of Daily Planet. It doesn't matter what day of the week it is; they're all the
+same.
+*/
 DailyPlanet_Mission5_path1() {
 	Loop {
 		ToSpace()
