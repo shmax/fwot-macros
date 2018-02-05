@@ -27,11 +27,13 @@ Tired of punishing events and endless grinding? Time to level the playing field!
 ## Before you run a mission script:
 The Futurama game remembers the last planet you visited and the last team that you completed a battle with, and the script simply chooses the first 5 character portraits, so before you run a mission script run through it manually once to bake-in the character set and the current planet.
 
+Also, make sure that your team is strong enough to easily handle the battles with no input from you. The script will automatically select the middle critter in the front row when the battle begins (for scientists), but otherwise does nothing to manage battle actions.
+
 ## To run a script:
 Have a look at this file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
 
 * `Ctrl-d` for (d)aily planet mission 5 path 1
-* `Ctrl-e` for (e)arth mission 5 path 13.
+* `Ctrl-e` for (e)arth mission 5 path 13 (great for farming Gamma coins)
 * `F1` to reload the currently running script (think of this as the stop button)
 * `Ctrl-q` to exit the script entirely (you will need to double-click to get it going again)
 
@@ -45,3 +47,4 @@ There are a number of features that I would definitely welcome:
 * dynamic character selection on battle briefing screen (use [ImageSearch](https://autohotkey.com/docs/commands/ImageSearch.htm) with character icons)
 * add more planets and missions
 * improve efficiency of battle routine
+* add advanced battle mechanics (triggering supers, etc)
