@@ -87,21 +87,23 @@ NeedHeal() {
 	return 0
 }
 
-Battle(x,y, flightTime) {
-	GoToNode(x, y, flightTime)
-	
-	; dismiss any Heal Your Party BS
-	if(NeedHeal()){
-		sclick(1625, 130) ; click close icon
-		Sleep, 500
+FindCargoDrop(cargo) {
+    if (cargo == "badge-4") {
+        file := "icons/badge4star.bmp"
+    }
+	ImageSearch, xPos, yPos, 530, 580, 1440, 790, *140 %file%
+	if(ErrorLevel == 0 ) {
+		return 1
 	}
-	
-	sclick(1500,845) ; click the START button
-	Sleep, 3500
-	
-	sclick(1370, 610) ; click middle critter
-	
-	Fight()
+	return 0
+}
+
+FindStartButton() {
+   		ImageSearch, xPos, yPos, 1280, 790, 1730, 900, *20 icons/greenbutton.bmp
+   		if(ErrorLevel == 0) {
+   		    return 1
+   		}
+   		return 0
 }
 
 TriggerSupers() {
@@ -117,7 +119,8 @@ TriggerSupers() {
 
 Fight() {
 
-	while(true) {
+	while(1)
+	{
 		ImageSearch, xPos, yPos, 750, 700, 1150, 800, *20 icons/greenbutton.bmp
 		done := (ErrorLevel == 0)
 		if(ErrorLevel == 0) {
@@ -155,6 +158,59 @@ GoToNode(x,y, dur){
 		elapsed := elapsed + increment
 	}
 	Sleep, 500
+}
+
+/*
+Travel to a point, and keep flying until the "Start" button or the "Heal All" popup appears. If "Heal All" appears it will be automatically closed.
+*/
+GoToStart(x,y){
+	res := 0
+	increment := 1000
+	sclick(x,y) ; click on the node
+
+	startButtonFound := FindStartButton()
+	needHealButtonFound := NeedHeal()
+
+	Sleep, 200
+	if(FuelUp()) {
+		; if we needed fuel right out of the gate, then we're currently stopped and must click
+		; the target node again
+		sclick(x,y)
+	}
+
+	while(1)
+	{
+        if(startButtonFound) {
+            return
+        }
+
+        if(needHealButtonFound){
+            sclick(1625, 130) ; click close icon
+            Sleep, 500
+        }
+
+		if(FuelUp()) {
+			; if we ran out of fuel somewhere in the middle, then we're stalled. We'll click in a circle
+			; around the ship to get moving again
+			ClickAroundShip()
+		}
+
+        startButtonFound := FindStartButton()
+        needHealButtonFound := NeedHeal()
+        Sleep, 1000
+	}
+	Sleep, 500
+}
+
+Battle(x,y) {
+	GoToStart(x, y)
+
+    sclick(1500,845) ; click the START button
+    Sleep, 4500
+
+	sclick(1370, 610) ; click middle critter
+
+	Fight()
 }
 
 NeedFuel() {
@@ -213,4 +269,22 @@ DailyPlanet() {
 
 Earth() {
 	sclick(590, 530) ; click Earth
+}
+
+RunWaitOne(command) {
+    ; WshShell object: http://msdn.microsoft.com/en-us/library/aew9yb99
+    shell := ComObjCreate("WScript.Shell")
+    ; Execute a single command via cmd.exe
+    exec := shell.Exec(ComSpec " /C " command)
+    ; Read and return the command's output
+    return exec.StdOut.ReadAll()
+}
+
+enableNetwork(enable) {
+    if(enable) {
+        RunWaitOne( "netsh interface set interface ""Ethernet 2"" admin=enabled" )
+    }
+    else {
+        RunWaitOne( "netsh interface set interface ""Ethernet 2"" admin=disabled" )
+    }
 }

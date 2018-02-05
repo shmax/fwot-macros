@@ -25,7 +25,7 @@ F1::Reload
  Ctrl-d - run d(aily planet) mission 5, path 1
 */
 ^d::
-    DailyPlanet_Mission5_path1()
+    DailyPlanet_Mission5_path1("badge-4")
     return
 
 /*
@@ -33,4 +33,17 @@ F1::Reload
 */
 ^e::
     Earth_Mission5_path13()
+    return
+
+^c::
+    enableNetwork(true)
+    return
+
+^v::
+    enableNetwork(false)
+    return
+
+^b::
+    res := FindCargoDrop("badge-4")
+    MsgBox %res%
     return
