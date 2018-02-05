@@ -39,3 +39,9 @@ Have a look at this file called `fwot.ahk`. Think of this file as the Menu of av
 1. Copy one of the existing ones and update the `GoToNode` and `Battle` calls. To get screen coordinates, use the Window Spy utility that comes with AutoHotKey.
 
 Have fun. Pull requests are welcome, but please don't bombard me with issues. If you see something you don't like, fix it yourself and submit it.
+
+## Coders wanted!
+There are a number of features that I would definitely welcome:
+* dynamic character selection on battle briefing screen (use [ImageSearch](https://autohotkey.com/docs/commands/ImageSearch.htm) with character icons)
+* add more planets and missions
+* improve efficiency of battle routine
