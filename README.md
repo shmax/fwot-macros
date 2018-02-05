@@ -25,7 +25,7 @@ Tired of punishing events and endless grinding? Time to level the playing field!
 6. Find the full screen button in the bottom-right corner of Bluestacks and click it. This script currently only works in full screen.
 
 ## To run a script:
-Have a look at this file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Once it's running, you can control things with a few different hotkeys:
+Have a look at this file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
 
 * `Ctrl-d` for (d)aily planet mission 5 path 1
 * `Ctrl-e` for (e)arth mission 5 path 13.
