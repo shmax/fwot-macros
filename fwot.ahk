@@ -49,4 +49,8 @@ Ctrl-e for (d)aily planet mission 5, path 13
     EnableNetwork(false)
     return
 
+ ^b::
+    CloseGame()
+    return
+
 Pause::Pause

@@ -294,7 +294,15 @@ RunWaitOne(command) {
 CloseGame() {
     Send {Esc} ; take game out of full screen
     Sleep, 1000
-    sclick(650, 22) ; click the close button in the tab
+
+    ; find the futurama tab
+    ImageSearch, xPos, yPos, 0, 0, 1920, 1080, *40 icons/app.bmp
+    MouseMove, xPos, yPos
+    Sleep, 500
+
+    ; find the close icon and click on it
+    ImageSearch, xPos, yPos, 0, 0, 1920, 1080, *40 icons/closeicon.bmp
+    sclick( xPos+5, yPos+5 )
     Sleep, 1000
 }
 
