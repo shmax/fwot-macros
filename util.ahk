@@ -16,6 +16,7 @@ sclick(x, y) {
 
 ToSpace(){
 	sclick(250, 990) ; click Space button
+	Sleep, 4000
 }
 
 Next(){
@@ -39,13 +40,14 @@ SelectCrew() {
 	Sleep, 500
 	
 	sclick(270, 450)
-	Sleep, 500
+	Sleep, 1500
 }
 
 StartMission() {
     sclick(1700, 1020)
 	Sleep, 1000
 	FuelUp()
+	Sleep, 7000
 }
 
 
@@ -57,6 +59,9 @@ SelectMission(mission) {
 	
 	if(mission <= MissionsPerScreen) {
 		sclick(350, TopMissionY + ((mission-1) * MissionHeight + (MissionHeight / 2) + 20))
+		Sleep, 1000
+		Next()
+		Sleep, 100
 	} else {
 		tilesToMove := mission - MissionsPerScreen
 		
@@ -70,7 +75,6 @@ SelectMission(mission) {
 		}
 		Sleep, 500
 		SelectMission(mission - tilesToMove)
-		return
 	}
 }
 
@@ -89,12 +93,19 @@ NeedHeal() {
 
 FindCargoDrop(cargo) {
     if (cargo == "badge-4") {
-        file := "icons/badge4star.bmp"
+        file1 := "icons/badge4star-text-obscured.bmp"
+        file2 := "icons/badge4star-text-unobscured.bmp"
     }
-	ImageSearch, xPos, yPos, 530, 580, 1440, 790, *140 %file%
+	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *20 %file%
 	if(ErrorLevel == 0 ) {
 		return 1
 	}
+
+	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *20 %file2%
+    if(ErrorLevel == 0 ) {
+        MsgBox %xPos%, %yPos%
+        return 1
+    }
 	return 0
 }
 
@@ -263,7 +274,7 @@ ClickAroundShip(){
 	Circle(xPos, yPos, 50, 45)
 }
 
-DailyPlanet() {
+SelectDailyPlanet() {
 	sclick(530, 540)
 }	
 
@@ -280,11 +291,63 @@ RunWaitOne(command) {
     return exec.StdOut.ReadAll()
 }
 
-enableNetwork(enable) {
+CloseGame() {
+    Send {Esc} ; take game out of full screen
+    Sleep, 1000
+    sclick(650, 22) ; click the close button in the tab
+    Sleep, 1000
+}
+
+FullScreen() {
+    sclick(1650, 1025)
+}
+
+StartGame() {
+    sclick(370, 185)
+    Sleep, 2000
+}
+
+EnableNetwork(enable) {
     if(enable) {
-        RunWaitOne( "netsh interface set interface ""Ethernet 2"" admin=enabled" )
+        Run *RunAs bat\enablenetwork.bat
+        Sleep, 5000
     }
     else {
-        RunWaitOne( "netsh interface set interface ""Ethernet 2"" admin=disabled" )
+        Run *RunAs bat\disablenetwork.bat
+    }
+}
+
+WaitForCargo(cargo, x, y) {
+    foundCargo := false
+    while (!foundCargo) {
+        ; disable the network as soon as the battle is complete
+        Sleep, 1500
+        EnableNetwork(false)
+
+        ; wait a few seconds for the loot boxes to open and for the "Connection Lost" dialog to appear
+        Sleep, 6000
+
+        foundCargo := FindCargoDrop(cargo)
+        if(foundCargo) {
+            EnableNetwork(true)
+            Sleep, 20000
+            Return()
+            Sleep, 16000
+        }
+        else
+        {
+            CoordMode, Mouse, Screen
+            CloseGame()
+            Sleep, 10000
+            EnableNetwork(true)
+            StartGame()
+            FullScreen()
+            Sleep, 38000
+
+            CoordMode, Mouse, Window
+
+            ToSpace()
+            Battle(x, y) ; click the planet we just left
+        }
     }
 }
