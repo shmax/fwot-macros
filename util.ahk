@@ -334,6 +334,7 @@ Reconnect() {
     if (ErrorLevel == 0) {
         sclick(xPos, yPos)
     }
+    Sleep 500
 }
 
 WaitForCargo(cargo, x, y) {
@@ -348,7 +349,6 @@ WaitForCargo(cargo, x, y) {
 
         foundCargo := FindCargoDrop(cargo)
 
-;        MsgBox %foundCargo%
         if(foundCargo) {
             EnableNetwork(true)
             Sleep, 10000
