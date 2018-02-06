@@ -96,14 +96,17 @@ FindCargoDrop(cargo) {
         file1 := "icons/badge4star-text-obscured.bmp"
         file2 := "icons/badge4star-text-unobscured.bmp"
     }
-	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *20 %file%
+    else if (cargo == "badge-2") {
+        file1 := "icons/badge2star-text-obscured.bmp"
+        file2 := "icons/badge2star-text-unobscured.bmp"
+    }
+	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *8 %file1%
 	if(ErrorLevel == 0 ) {
 		return 1
 	}
 
-	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *20 %file2%
+	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *80 %file2%
     if(ErrorLevel == 0 ) {
-        MsgBox %xPos%, %yPos%
         return 1
     }
 	return 0
@@ -293,25 +296,25 @@ RunWaitOne(command) {
 
 CloseGame() {
     Send {Esc} ; take game out of full screen
-    Sleep, 1000
+    Sleep, 3000
 
-    ; find the futurama tab
-    ImageSearch, xPos, yPos, 0, 0, 1920, 1080, *40 icons/app.bmp
-    MouseMove, xPos, yPos
-    Sleep, 500
+    CoordMode, Mouse, Screen
+    sclick( 650, 22 )
+    CoordMode, Mouse, Window
 
-    ; find the close icon and click on it
-    ImageSearch, xPos, yPos, 0, 0, 1920, 1080, *40 icons/closeicon.bmp
-    sclick( xPos+5, yPos+5 )
-    Sleep, 1000
+    Sleep, 2000
 }
 
 FullScreen() {
+    CoordMode, Mouse, Screen
     sclick(1650, 1025)
+    CoordMode, Mouse, Window
 }
 
 StartGame() {
+    CoordMode, Mouse, Screen
     sclick(370, 185)
+    CoordMode, Mouse, Window
     Sleep, 2000
 }
 
@@ -325,6 +328,14 @@ EnableNetwork(enable) {
     }
 }
 
+Reconnect() {
+    ImageSearch, xPos, yPos, 1000, 620, 1460, 800, *20 icons/reconnect.bmp
+
+    if (ErrorLevel == 0) {
+        sclick(xPos, yPos)
+    }
+}
+
 WaitForCargo(cargo, x, y) {
     foundCargo := false
     while (!foundCargo) {
@@ -332,27 +343,28 @@ WaitForCargo(cargo, x, y) {
         Sleep, 1500
         EnableNetwork(false)
 
-        ; wait a few seconds for the loot boxes to open and for the "Connection Lost" dialog to appear
-        Sleep, 6000
+        ; wait a few seconds for the loot boxes to open
+        Sleep, 8000
 
         foundCargo := FindCargoDrop(cargo)
+
+;        MsgBox %foundCargo%
         if(foundCargo) {
             EnableNetwork(true)
-            Sleep, 20000
+            Sleep, 10000
+
+            Reconnect()
+
             Return()
             Sleep, 16000
         }
         else
         {
-            CoordMode, Mouse, Screen
             CloseGame()
-            Sleep, 10000
             EnableNetwork(true)
             StartGame()
             FullScreen()
             Sleep, 38000
-
-            CoordMode, Mouse, Window
 
             ToSpace()
             Battle(x, y) ; click the planet we just left

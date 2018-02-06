@@ -28,7 +28,9 @@ Ctrl-d - run (d)aily planet mission 5, path 1
     return
 
 /*
-Ctrl-Shift-d - run (d)aily planet mission 3, path 1 but when we get to the end keep repeating the last battle until we win a 4-star badge
+Ctrl-Shift-d - run (d)aily planet mission 3, path 1 but when we get to the end keep repeating the last battle until we win a 4-star badge.
+
+Note: you must start this script with "Run as Administrator"
 */
 ^+d::
     DailyPlanet(3, 1, "badge-4")
@@ -42,15 +44,11 @@ Ctrl-e for (d)aily planet mission 5, path 13
     return
 
 ^+c::
-    EnableNetwork(true)
-    return
-
-^+v::
-    EnableNetwork(false)
+    WaitForCargo("badge-4", 480, 540)
     return
 
  ^b::
-    CloseGame()
+    Reconnect()
     return
 
 Pause::Pause
