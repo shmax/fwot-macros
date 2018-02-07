@@ -248,10 +248,10 @@ FuelUp() {
 	
 	sclick(1240,750)	; GET button #1
 	Sleep, 500
-	
+
 	sclick(1300,680)	; GET button #2
 	Sleep, 400
-	
+
 	sclick(1250,740) ; "USE" button
 	Sleep, 400
 	
@@ -301,7 +301,7 @@ CloseGame() {
     Sleep, 3000
 
     CoordMode, Mouse, Screen
-    sclick( Config.closeIconPosition[0], Config.closeIconPosition[1] )
+    sclick( Config.closeIconPosition[1], Config.closeIconPosition[2] )
     CoordMode, Mouse, Window
 
     Sleep, 2000
@@ -310,14 +310,14 @@ CloseGame() {
 FullScreen() {
     global Config
     CoordMode, Mouse, Screen
-    sclick(Config.fullScreenIconPosition[0], Config.fullScreenIconPosition[1])
+    sclick(Config.fullScreenIconPosition[1], Config.fullScreenIconPosition[2])
     CoordMode, Mouse, Window
 }
 
 StartGame() {
     global Config
     CoordMode, Mouse, Screen
-    sclick(Config.futuramaAppIconPosition[0], Config.futuramaAppIconPosition[1])
+    sclick(Config.futuramaAppIconPosition[1], Config.futuramaAppIconPosition[2])
     CoordMode, Mouse, Window
     Sleep, 2000
 }

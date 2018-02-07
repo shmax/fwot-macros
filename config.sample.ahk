@@ -1,6 +1,6 @@
 Config := {}
 
-Config.networkName := "Ethernet 2"
+Config.networkName := "Ethernet"
 
 ; The little red "x" in a circle in the "Futurama" tab in BlueStacks
 Config.closeIconPosition := [650,22]
