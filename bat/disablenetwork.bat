@@ -1,1 +1,1 @@
-netsh interface set interface "Ethernet 2" admin=disabled
+netsh interface set interface %1 admin=disabled

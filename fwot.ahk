@@ -1,4 +1,5 @@
 #Include %A_ScriptDir%\util.ahk
+#Include %A_ScriptDir%\config.ahk
 #Include %A_ScriptDir%\missions\dailyplanet\mission5.ahk
 #Include %A_ScriptDir%\missions\earth\mission5.ahk
 #Include %A_ScriptDir%\tasks\collectnixonbucks.ahk
@@ -45,10 +46,6 @@ Ctrl-e for (d)aily planet mission 5, path 13
 
 ^+c::
     WaitForCargo("badge-4", 480, 540)
-    return
-
- ^b::
-    Reconnect()
     return
 
 Pause::Pause

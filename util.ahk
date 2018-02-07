@@ -295,36 +295,44 @@ RunWaitOne(command) {
 }
 
 CloseGame() {
+    global Config
+
     Send {Esc} ; take game out of full screen
     Sleep, 3000
 
     CoordMode, Mouse, Screen
-    sclick( 650, 22 )
+    sclick( Config.closeIconPosition[0], Config.closeIconPosition[1] )
     CoordMode, Mouse, Window
 
     Sleep, 2000
 }
 
 FullScreen() {
+    global Config
     CoordMode, Mouse, Screen
-    sclick(1650, 1025)
+    sclick(Config.fullScreenIconPosition[0], Config.fullScreenIconPosition[1])
     CoordMode, Mouse, Window
 }
 
 StartGame() {
+    global Config
     CoordMode, Mouse, Screen
-    sclick(370, 185)
+    sclick(Config.futuramaAppIconPosition[0], Config.futuramaAppIconPosition[1])
     CoordMode, Mouse, Window
     Sleep, 2000
 }
 
 EnableNetwork(enable) {
+    global Config
+    networkName := Config.networkName
     if(enable) {
-        Run *RunAs bat\enablenetwork.bat
+        cmd := "netsh interface set interface """ . networkName . """ admin=enabled"
+        RunWaitOne(cmd)
         Sleep, 5000
     }
     else {
-        Run *RunAs bat\disablenetwork.bat
+        cmd := "netsh interface set interface """ . networkName . """ admin=disabled"
+        RunWaitOne(cmd)
     }
 }
 
