@@ -342,7 +342,7 @@ Reconnect() {
     if (ErrorLevel == 0) {
         sclick(xPos, yPos)
     }
-    Sleep 1500
+    Sleep 3000
 }
 
 WaitForCargo(cargo, x, y) {
