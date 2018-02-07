@@ -17,15 +17,15 @@ Tired of punishing events and endless grinding? Time to level the playing field!
     ```
     > git clone https://github.com/shmax/fwot-macros.git
     ```
-2. Put your screen resolution in 1920 x 1080
-
-3. Run BlueStacks
-4. Install Futurama: Worlds of Tomorrow in BlueStacks
-5. Run Futurama: Worlds of Tomorrow (in Bluestacks)
-6. Find the full screen button in the bottom-right corner of Bluestacks and click it. This script currently only works in full screen.
+2. Copy the file called "config.sample.ahk", rename it to config.sample, and adjust the values contained in it
+3. Put your screen resolution in 1920 x 1080
+4. Run BlueStacks
+5. Install Futurama: Worlds of Tomorrow in BlueStacks
+6. Run Futurama: Worlds of Tomorrow (in Bluestacks)
+7. Find the full screen button in the bottom-right corner of Bluestacks and click it. This script currently only works in full screen.
 
 ## Before you run a mission script:
-The Futurama game remembers the last planet you visited and the last team that you completed a battle with, and the script simply chooses the first 5 character portraits, so before you run a mission script run through it manually once to bake-in the character set and the current planet.
+The Futurama game remembers the last planet you visited and the last team that you completed a battle with, and the script simply chooses the first 5 character portraits, so before you run a mission script play through it manually yourself once to bake-in the character set and the current planet.
 
 Also, make sure that your team is strong enough to easily handle the battles with no input from you. The script will automatically select the middle critter in the front row when the battle begins (for scientists), but otherwise does nothing to manage battle actions.
 

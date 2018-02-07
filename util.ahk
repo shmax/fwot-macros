@@ -342,14 +342,13 @@ Reconnect() {
     if (ErrorLevel == 0) {
         sclick(xPos, yPos)
     }
-    Sleep 500
+    Sleep 1500
 }
 
 WaitForCargo(cargo, x, y) {
     foundCargo := false
     while (!foundCargo) {
         ; disable the network as soon as the battle is complete
-        Sleep, 1500
         EnableNetwork(false)
 
         ; wait a few seconds for the loot boxes to open
