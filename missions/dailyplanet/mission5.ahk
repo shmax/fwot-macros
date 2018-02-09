@@ -12,22 +12,21 @@ DailyPlanet(mission, path, cargo:= "") {
 		SelectCrew()
 		StartMission()
 
+        nodes := []
+
         if(path == 1) {
-            GoToNode(630,390, 4000)
+            nodes.Push(["node",     [630,390], 4000])
+            nodes.Push(["battle",   [480,430]])
+            nodes.Push(["battle",   [600,240]])
+            nodes.Push(["battle",   [1045, 540]])
+            nodes.Push(["battle",   [970, 240]])
+            nodes.Push(["battle",   [1000, 500]])
 
-            Battle(480,430) ;
-
-            Battle(600, 240) ; next star node
-
-            Battle(1045, 540) ; next star node
-
-            Battle(970, 240) ; next star node
-
-            Battle(1000,500)
+            FollowPath(nodes)
         }
 
         if (cargo) {
-            waitForCargo(cargo, 480, 540)
+            waitForCargo(cargo, [480, 540])
         }
         else {
             Sleep, 15000

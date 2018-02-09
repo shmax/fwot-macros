@@ -1,7 +1,6 @@
 #Include %A_ScriptDir%\util.ahk
 #Include %A_ScriptDir%\config.ahk
 #Include %A_ScriptDir%\missions\dailyplanet\mission5.ahk
-#Include %A_ScriptDir%\missions\earth\mission5.ahk
 #Include %A_ScriptDir%\tasks\collectnixonbucks.ahk
 
 WinActivate BlueStacks
@@ -22,30 +21,16 @@ Exit the script entirely
 */
 
 /*
-Ctrl-d - run (d)aily planet mission 5, path 1
-*/
-^d::
-    DailyPlanet(5, 1)
-    return
-
-/*
-Ctrl-Shift-d - run (d)aily planet mission 3, path 1 but when we get to the end keep repeating the last battle until we win a 4-star badge.
+Alt-Shift-d - run (d)aily planet mission 3, path 1 but when we get to the end keep repeating the last battle until we win a 4-star badge.
 
 Note: you must start this script with "Run as Administrator"
 */
 ^+d::
-    DailyPlanet(3, 1, "badge-4")
-    return
-
-/*
-Ctrl-e for (d)aily planet mission 5, path 13
-*/
-^e::
-    Earth_5(13)
+    DailyPlanet(3, 1, "4-star-badge")
     return
 
 ^+c::
-    WaitForCargo("badge-4", 480, 540)
+    WaitForCargo("4-star-badge", [480, 540])
     return
 
 Pause::Pause

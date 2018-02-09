@@ -92,14 +92,9 @@ NeedHeal() {
 }
 
 FindCargoDrop(cargo) {
-    if (cargo == "badge-4") {
-        file1 := "icons/badge4star-text-obscured.bmp"
-        file2 := "icons/badge4star-text-unobscured.bmp"
-    }
-    else if (cargo == "badge-2") {
-        file1 := "icons/badge2star-text-obscured.bmp"
-        file2 := "icons/badge2star-text-unobscured.bmp"
-    }
+    file1 := "icons/badges/" cargo "-text-obscured.bmp"
+    file2 := "icons/badges/" cargo "-text-unobscured.bmp"
+
 	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *8 %file1%
 	if(ErrorLevel == 0 ) {
 		return 1
@@ -148,13 +143,31 @@ Fight() {
 	}
 }
 
-GoToNode(x,y, dur){
+FollowPath(nodes) {
+
+    for index, element in nodes
+    {
+        if (element[1] == "node")
+        {
+            nextNode := nodes[index+1]
+            GoToNode(element[2], element[3], nextNode[2])
+        }
+        else if (element[1] == "battle")
+        {
+            Battle(element[2])
+        }
+    }
+}
+
+GoToNode(pos, dur, nextNodePos){
+    x := pos[1]
+    y := pos[2]
 	elapsed := 0
 	increment := 1000
-	
+
 	res := 0
 	sclick(x,y) ; click on the node
-	
+
 	Sleep, 200
 	if(FuelUp()) {
 		; if we needed fuel right out of the gate, then we're currently stopped and must click
@@ -165,8 +178,16 @@ GoToNode(x,y, dur){
 		; do a fuel check every second
 		Sleep, increment
 		if(FuelUp()) {
+		    ; before we try clicking in a circle, try clicking on the next node.
+		    if(nextNodePos) {
+		        sclick(nextNodePos[1], nextNodePos[2])
+		        Sleep, 200
+		     }
+
+
 			; if we ran out of fuel somewhere in the middle, then we're stalled. We'll click in a circle
 			; around the ship to get moving again
+			; TODO: if you run out of fuel on a node with branching paths, this can set you off down the wrong path. Figure out a solution
 			ClickAroundShip()
 		}
 		elapsed := elapsed + increment
@@ -177,7 +198,10 @@ GoToNode(x,y, dur){
 /*
 Travel to a point, and keep flying until the "Start" button or the "Heal All" popup appears. If "Heal All" appears it will be automatically closed.
 */
-GoToStart(x,y){
+GoToStart(pos){
+    x := pos[1]
+    y := pos[2]
+
 	res := 0
 	increment := 1000
 	sclick(x,y) ; click on the node
@@ -216,13 +240,21 @@ GoToStart(x,y){
 	Sleep, 500
 }
 
-Battle(x,y) {
-	GoToStart(x, y)
+Battle(pos) {
+
+	GoToStart(pos)
 
     sclick(1500,845) ; click the START button
     Sleep, 4500
 
 	sclick(1370, 610) ; click middle critter
+
+    Sleep, 2000
+	sclick(67, 70) ; click the speed up button
+	Sleep, 100
+
+    sclick(67, 70) ; click the speed up button
+    Sleep, 100
 
 	Fight()
 }
@@ -345,7 +377,7 @@ Reconnect() {
     Sleep 1500
 }
 
-WaitForCargo(cargo, x, y) {
+WaitForCargo(cargo, pos) {
     foundCargo := false
     while (!foundCargo) {
         ; disable the network as soon as the battle is complete
@@ -374,7 +406,7 @@ WaitForCargo(cargo, x, y) {
             Sleep, 38000
 
             ToSpace()
-            Battle(x, y) ; click the planet we just left
+            Battle(pos) ; click the planet we just left
         }
     }
 }
