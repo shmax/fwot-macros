@@ -91,6 +91,14 @@ NeedHeal() {
 	return 0
 }
 
+NeedRevive() {
+	ImageSearch, xPos, yPos, 820, 260, 1050, 330, *140 icons/revive.bmp
+	if(ErrorLevel == 0 ) {
+		return 1
+	}
+	return 0
+}
+
 FindCargoDrop(cargo) {
     file1 := "icons/badges/" cargo "-text-obscured.bmp"
     file2 := "icons/badges/" cargo "-text-unobscured.bmp"
@@ -166,6 +174,14 @@ GoToNode(pos, dur, nextNodePos){
 	increment := 1000
 
 	res := 0
+
+	Sleep, 500
+    needReviveButtonFound := NeedRevive()
+    if(needReviveButtonFound){
+        sclick(1470, 306) ; click close icon
+        Sleep, 500
+    }
+
 	sclick(x,y) ; click on the node
 
 	Sleep, 200
@@ -177,7 +193,14 @@ GoToNode(pos, dur, nextNodePos){
 	while(elapsed <= dur) {
 		; do a fuel check every second
 		Sleep, increment
-		if(FuelUp()) {
+
+        needReviveButtonFound := NeedRevive()
+        if(needReviveButtonFound){
+            sclick(1470, 306) ; click close icon
+            Sleep, 500
+        }
+
+		if(FuelUp() || needReviveButtonFound) {
 		    ; before we try clicking in a circle, try clicking on the next node.
 		    if(nextNodePos) {
 		        sclick(nextNodePos[1], nextNodePos[2])
@@ -190,6 +213,7 @@ GoToNode(pos, dur, nextNodePos){
 			; TODO: if you run out of fuel on a node with branching paths, this can set you off down the wrong path. Figure out a solution
 			ClickAroundShip()
 		}
+
 		elapsed := elapsed + increment
 	}
 	Sleep, 500
@@ -208,6 +232,7 @@ GoToStart(pos){
 
 	startButtonFound := FindStartButton()
 	needHealButtonFound := NeedHeal()
+	needReviveButtonFound := NeedRevive()
 
 	Sleep, 200
 	if(FuelUp()) {
@@ -223,7 +248,12 @@ GoToStart(pos){
         }
 
         if(needHealButtonFound){
-            sclick(1625, 130) ; click close icon
+            sclick(1460, 130) ; click close icon
+            Sleep, 500
+        }
+
+        if(needReviveButtonFound){
+            sclick(1470, 306) ; click close icon
             Sleep, 500
         }
 
@@ -235,6 +265,7 @@ GoToStart(pos){
 
         startButtonFound := FindStartButton()
         needHealButtonFound := NeedHeal()
+        needReviveButtonFound := NeedRevive()
         Sleep, 1000
 	}
 	Sleep, 500
