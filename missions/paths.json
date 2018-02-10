@@ -1,0 +1,32 @@
+{
+    "earth": {
+        "coords":[590, 530],
+        "loveisintheair": {
+            "trueromance": {
+                "":"// path1 is the Leg Mutant-gated path",
+                "path1": [
+                    ["battle",   [630,90]],
+                    ["battle",   [970,240]],
+                    ["battle",   [970, 240]],
+                    ["battle",   [970, 240]],
+                    ["battle",   [970, 990]],
+                    ["battle",   [820, 840]],
+                    ["node",     [785, 1065], 7000]
+                ]
+            }
+        }
+    },
+    "dailyplanet": {
+        "coords":[530,540],
+        "reentrycoords":[480, 540],
+        "":"// note that all daily planet missions have the same two paths",
+        "path1": [
+            ["node",     [630,390], 4000],
+            ["battle",   [480,430]],
+            ["battle",   [600,240]],
+            ["battle",   [1045, 540]],
+            ["battle",   [970, 240]],
+            ["battle",   [1000, 500]]
+        ]
+    }
+}

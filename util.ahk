@@ -6,6 +6,10 @@
 SendMode Event  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+#Include <JSON>
+FileRead, FileContents, %A_ScriptDir%\missions\paths.json
+Paths := JSON.Load(FileContents, true)
+
 TopMissionY = 166
 MissionHeight = 229
 MissionsPerScreen = 4
@@ -340,14 +344,6 @@ ClickAroundShip(){
 	Circle(xPos, yPos, 50, 45)
 }
 
-SelectDailyPlanet() {
-	sclick(530, 540)
-}	
-
-Earth() {
-	sclick(590, 530) ; click Earth
-}
-
 RunWaitOne(command) {
     ; WshShell object: http://msdn.microsoft.com/en-us/library/aew9yb99
     shell := ComObjCreate("WScript.Shell")
@@ -440,4 +436,33 @@ WaitForCargo(cargo, pos) {
             Battle(pos) ; click the planet we just left
         }
     }
+}
+
+SelectPlanet(planet) {
+    global Paths
+    sclick(Paths[planet].coords[1], Paths[planet].coords[2])
+}
+
+RunMission(planet, mission, nodes, cargo:=0)
+{
+    Loop {
+    		ToSpace()
+    		SelectPlanet(planet)
+    		Sleep, 2000
+
+    		SelectMission(mission)
+    		SelectCrew()
+    		StartMission()
+
+            FollowPath(nodes)
+
+            if (cargo) {
+                waitForCargo(cargo, Paths[planet].reentrycoords)
+            }
+            else {
+                Sleep, 15000
+           		Return()
+           		Sleep, 16000
+            }
+    	}
 }
