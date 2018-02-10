@@ -445,6 +445,7 @@ SelectPlanet(planet) {
 
 RunMission(planet, mission, nodes, cargo:=0)
 {
+    global Paths
     Loop {
     		ToSpace()
     		SelectPlanet(planet)
