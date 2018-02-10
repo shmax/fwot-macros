@@ -32,13 +32,15 @@ Also, make sure that your team is strong enough to easily handle the battles wit
 ## To run a script:
 Have a look at the file called `fwot.ahk`. Think of this file as the Menu of available missions. Double-click on it to kick off the script. Switch back to BlueStacks and make sure it is running full screen. Once it's running, you can control things with a few different hotkeys:
 
-* `Ctrl-d` for (d)aily planet mission 5 path 1
-* `Ctrl-e` for (e)arth mission 5 path 13 (great for farming Gamma coins)
+* `Ctrl-shift-d` for (d)aily planet mission 8 path 1
+* `Ctrl-shift-e` for (e)arth valentine's day mission 4, path 1 (for farming orbs)
 * `F1` to reload the currently running script (think of this as the stop button)
 * `Ctrl-q` to exit the script entirely (you will need to double-click to get it going again)
 
 ## To add a new mission script:
-1. Copy one of the existing ones and update the `GoToNode` and `Battle` calls. To get screen coordinates, use the Window Spy utility that comes with AutoHotKey.
+1. Examine /missions/paths.json. Add the data for your new mission in there, following the format you see for the existing missions.
+2. Modify one of the calls in fwot.ahk, or add a new shortcut.
+3. Run your script and watch it loop a few times. If it all works, submit a PR.
 
 Have fun. Pull requests are welcome, but please don't bombard me with issues. If you see something you don't like, fix it yourself and submit it.
 
