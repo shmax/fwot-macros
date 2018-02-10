@@ -22,7 +22,11 @@ Exit the script entirely
 Note: you must start this script with "Run as Administrator"
 */
 ^+d::
-    RunMission("dailyplanet", 8, Paths.dailyplanet.path1)
+    RunMission("dailyplanet", 5, Paths.dailyplanet.path1)
+    return
+
+^+v::
+    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-villain-badge")
     return
 
 ^+e::
