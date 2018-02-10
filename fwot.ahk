@@ -1,3 +1,4 @@
+#SingleInstance force
 #Include %A_ScriptDir%\util.ahk
 #Include %A_ScriptDir%\config.ahk
 #Include %A_ScriptDir%\tasks\collectnixonbucks.ahk

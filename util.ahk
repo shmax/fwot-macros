@@ -90,17 +90,17 @@ Return() {
 NeedHeal() {
 	ImageSearch, xPos, yPos, 1050, 820, 1200, 880, *140 icons/healall.bmp
 	if(ErrorLevel == 0 ) {
-		return 1
+		return [xPos+5, yPos+5]
 	}
-	return 0
+	return null
 }
 
 NeedRevive() {
 	ImageSearch, xPos, yPos, 820, 260, 1050, 330, *140 icons/revive.bmp
 	if(ErrorLevel == 0 ) {
-		return 1
+		return [xPos+5, yPos+5]
 	}
-	return 0
+	return null
 }
 
 FindCargoDrop(cargo) {
@@ -180,9 +180,9 @@ GoToNode(pos, dur, nextNodePos){
 	res := 0
 
 	Sleep, 500
-    needReviveButtonFound := NeedRevive()
-    if(needReviveButtonFound){
-        sclick(1470, 306) ; click close icon
+    reviveButton := NeedRevive()
+    if(reviveButton){
+        sclick(reviveButton[1], reviveButton[2]) ; click close icon
         Sleep, 500
     }
 
@@ -198,13 +198,13 @@ GoToNode(pos, dur, nextNodePos){
 		; do a fuel check every second
 		Sleep, increment
 
-        needReviveButtonFound := NeedRevive()
-        if(needReviveButtonFound){
-            sclick(1470, 306) ; click close icon
+        reviveButton := NeedRevive()
+        if(reviveButton){
+            sclick(reviveButton[1], reviveButton[2]) ; click close icon
             Sleep, 500
         }
 
-		if(FuelUp() || needReviveButtonFound) {
+		if(FuelUp() || reviveButton) {
 		    ; before we try clicking in a circle, try clicking on the next node.
 		    if(nextNodePos) {
 		        sclick(nextNodePos[1], nextNodePos[2])
@@ -235,8 +235,8 @@ GoToStart(pos){
 	sclick(x,y) ; click on the node
 
 	startButtonFound := FindStartButton()
-	needHealButtonFound := NeedHeal()
-	needReviveButtonFound := NeedRevive()
+	healButton := NeedHeal()
+	reviveButton := NeedRevive()
 
 	Sleep, 200
 	if(FuelUp()) {
@@ -251,13 +251,13 @@ GoToStart(pos){
             return
         }
 
-        if(needHealButtonFound){
-            sclick(1460, 130) ; click close icon
+        if(healButton){
+            sclick(healButton[1], healButton[2]) ; click close icon
             Sleep, 500
         }
 
-        if(needReviveButtonFound){
-            sclick(1470, 306) ; click close icon
+        if(reviveButton){
+            sclick(reviveButton[1], reviveButton[2]) ; click close icon
             Sleep, 500
         }
 
@@ -268,8 +268,8 @@ GoToStart(pos){
 		}
 
         startButtonFound := FindStartButton()
-        needHealButtonFound := NeedHeal()
-        needReviveButtonFound := NeedRevive()
+        healButton := NeedHeal()
+        reviveButton := NeedRevive()
         Sleep, 1000
 	}
 	Sleep, 500
