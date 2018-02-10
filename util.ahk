@@ -316,10 +316,10 @@ FuelUp() {
 	sclick(1240,750)	; GET button #1
 	Sleep, 500
 
-	sclick(1300,680)	; GET button #2
+	sclick(1350,680)	; GET button #2
 	Sleep, 400
 
-	sclick(1250,740) ; "USE" button
+	sclick(1230,750) ; "USE" button
 	Sleep, 400
 	
 	return 1
