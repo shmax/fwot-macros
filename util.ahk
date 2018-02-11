@@ -439,7 +439,7 @@ WaitForCargo(cargo, pos) {
             Sleep, 38000
 
             ToSpace()
-            Battle(pos) ; click the planet we just left
+            Battle(pos, null) ; click the planet we just left
         }
     }
 }
