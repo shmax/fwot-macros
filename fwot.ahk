@@ -27,7 +27,7 @@ Note: you must start this script with "Run as Administrator"
     return
 
 ^+e::
-    RunMission("dailyplanet", 5, Paths.dailyplanet.path2)
+    RunMission("dailyplanet", 8, Paths.dailyplanet.path2)
     return
 
 ^+v::
