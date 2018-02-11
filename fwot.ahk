@@ -26,11 +26,16 @@ Note: you must start this script with "Run as Administrator"
     RunMission("dailyplanet", 5, Paths.dailyplanet.path1)
     return
 
+^+e::
+    RunMission("dailyplanet", 5, Paths.dailyplanet.path2)
+    return
+
 ^+v::
     RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-villain-badge")
     return
 
-^+e::
+
+^+f::
     RunMission("earth", 4, Paths.earth.loveisintheair.trueromance.path1)
     return
 
