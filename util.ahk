@@ -159,14 +159,14 @@ FollowPath(nodes) {
 
     for index, element in nodes
     {
+        nextNode := nodes[index+1]
         if (element[1] == "node")
         {
-            nextNode := nodes[index+1]
             GoToNode(element[2], element[3], nextNode[2])
         }
         else if (element[1] == "battle")
         {
-            Battle(element[2])
+            Battle(element[2], nextNode)
         }
     }
 }
@@ -226,7 +226,7 @@ GoToNode(pos, dur, nextNodePos){
 /*
 Travel to a point, and keep flying until the "Start" button or the "Heal All" popup appears. If "Heal All" appears it will be automatically closed.
 */
-GoToStart(pos){
+GoToStart(pos, nextNodePos){
     x := pos[1]
     y := pos[2]
 
@@ -262,6 +262,12 @@ GoToStart(pos){
         }
 
 		if(FuelUp()) {
+            ; before we try clicking in a circle, try clicking on the next node if one is available.
+            if(nextNodePos) {
+                sclick(nextNodePos[1], nextNodePos[2])
+                Sleep, 200
+             }
+
 			; if we ran out of fuel somewhere in the middle, then we're stalled. We'll click in a circle
 			; around the ship to get moving again
 			ClickAroundShip()
@@ -275,9 +281,9 @@ GoToStart(pos){
 	Sleep, 500
 }
 
-Battle(pos) {
+Battle(pos, nextNodePos) {
 
-	GoToStart(pos)
+	GoToStart(pos, nextNodePos)
 
     sclick(1500,845) ; click the START button
     Sleep, 4500
