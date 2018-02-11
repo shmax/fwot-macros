@@ -23,7 +23,7 @@ Exit the script entirely
 Note: you must start this script with "Run as Administrator"
 */
 ^+d::
-    RunMission("dailyplanet", 5, Paths.dailyplanet.path1)
+    RunMission("dailyplanet", 8, Paths.dailyplanet.path1)
     return
 
 ^+v::
