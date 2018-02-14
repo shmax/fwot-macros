@@ -31,7 +31,7 @@ Note: you must start this script with "Run as Administrator"
     return
 
 ^+v::
-    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-villain-badge")
+    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-influencer-badge")
     return
 
 
