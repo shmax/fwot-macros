@@ -27,11 +27,12 @@ Note: you must start this script with "Run as Administrator"
     return
 
 ^+e::
-    RunMission("dailyplanet", 8, Paths.dailyplanet.path2)
+    RunMission("dailyplanet", 3
+	, Paths.dailyplanet.path2)
     return
 
 ^+v::
-    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-influencer-badge")
+    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-robot-badge")
     return
 
 
