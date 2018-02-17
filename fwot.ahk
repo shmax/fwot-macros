@@ -36,8 +36,8 @@ Note: you must start this script with "Run as Administrator"
     return
 
 
-^+f::
-    RunMission("earth", 4, Paths.earth.loveisintheair.trueromance.path1)
+^+m::
+    RunMission("earth", 10, Paths.earth.monstergauntlet.round10.path6)
     return
 
 Pause::Pause
