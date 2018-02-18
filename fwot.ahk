@@ -40,4 +40,8 @@ Note: you must start this script with "Run as Administrator"
     RunMission("earth", 10, Paths.earth.monstergauntlet.round10.path6)
     return
 
+^+x::
+    CollectNixonBucks()
+    return
+
 Pause::Pause

@@ -469,7 +469,7 @@ RunMission(planet, mission, nodes, cargo:=0)
             else {
                 Sleep, 15000
            		Return()
-           		Sleep, 16000
+           		Sleep, 19000
             }
     	}
 }
