@@ -37,11 +37,12 @@ Note: you must start this script with "Run as Administrator"
 
 
 ^+m::
-    RunMission("earth", 10, Paths.earth.monstergauntlet.round10.path6)
+    RunMission("corleone5", 14, Paths.corleone5.theheadofthehorse.path1)
     return
 
 ^+x::
-    CollectNixonBucks()
+    NeedFuel()
+;    CollectNixonBucks()
     return
 
 Pause::Pause

@@ -98,6 +98,7 @@ NeedHeal() {
 NeedRevive() {
 	ImageSearch, xPos, yPos, 820, 260, 1050, 330, *140 icons/revive.bmp
 	if(ErrorLevel == 0 ) {
+        debug("NeedRevive: revive needed")
 		return [xPos+5, yPos+5]
 	}
 	return null
@@ -107,7 +108,7 @@ FindCargoDrop(cargo) {
     file1 := "icons/badges/" cargo "-text-obscured.bmp"
     file2 := "icons/badges/" cargo "-text-unobscured.bmp"
 
-	ImageSearch, xPos, yPos, 720, 780, 1216, 820, *8 %file1%
+	ImageSearch, xPos, yPos, 315, 850, 1620, 860, *8 %file1%
 	if(ErrorLevel == 0 ) {
 		return 1
 	}
@@ -156,7 +157,7 @@ Fight() {
 }
 
 FollowPath(nodes) {
-
+    debug("FollowPath")
     for index, element in nodes
     {
         nextNode := nodes[index+1]
@@ -172,6 +173,11 @@ FollowPath(nodes) {
 }
 
 GoToNode(pos, dur, nextNodePos){
+    x := pos[1]
+    y := pos[2]
+
+    debug("GoToNode:" %x% %y%)
+
     x := pos[1]
     y := pos[2]
 	elapsed := 0
@@ -230,6 +236,8 @@ GoToStart(pos, nextNodePos){
     x := pos[1]
     y := pos[2]
 
+    debug("Battle:" %x% %y%)
+
 	res := 0
 	increment := 1000
 	sclick(x,y) ; click on the node
@@ -282,6 +290,10 @@ GoToStart(pos, nextNodePos){
 }
 
 Battle(pos, nextNodePos) {
+    x := pos[1]
+    y := pos[2]
+
+    debug("Battle:" %x% %y%)
 
 	GoToStart(pos, nextNodePos)
 
@@ -301,12 +313,14 @@ Battle(pos, nextNodePos) {
 }
 
 NeedFuel() {
-	ImageSearch, FoundX, FoundY, 0, 0, 1400, 750, *40 icons/getdarkmatter.bmp
+	ImageSearch, FoundX, FoundY, 0, 0, 1400, 750, *20 icons/getdarkmatter.bmp
 	
 	if (FoundX == "") {
+		    debug("NeedFuel: fuel not needed." )
 		return 0
 	}
 	else {
+	    debug("NeedFuel: fuel needed. getdarkmatter.bmp found at " . FoundX . ", " . FoundY )
 		return 1
 	}
 }
@@ -346,6 +360,8 @@ Circle(h, k, r, deg) {
 }
 
 ClickAroundShip(){
+    debug("ClickAroundShip")
+
 	ImageSearch, xPos, yPos, 360, 230, 1330, 860, *20 icons/pes.bmp
 	Circle(xPos, yPos, 50, 45)
 }
@@ -449,8 +465,15 @@ SelectPlanet(planet) {
     sclick(Paths[planet].coords[1], Paths[planet].coords[2])
 }
 
+debug(string) {
+	string .= "`n"
+    FileAppend %string%, ahk.log
+}
+
 RunMission(planet, mission, nodes, cargo:=0)
 {
+    debug("RunMission: " %mission%)
+
     global Paths
     Loop {
     		ToSpace()

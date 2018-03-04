@@ -29,6 +29,21 @@
             }
         }
     },
+    "corleone5": {
+        "coords": [545, 545],
+        "reentrycoords":[480, 540],
+        "theheadofthehorse": {
+            "path1":[
+                ["node", [592,805], 3000],
+                ["battle", [140,470]],
+                ["battle", [630,960]],
+                ["battle", [820,840]],
+                ["battle", [1050,650]],
+                ["battle", [820,240]],
+                ["node", [220,360]]
+            ]
+        }
+    },
     "dailyplanet": {
         "coords":[530,540],
         "reentrycoords":[480, 540],
