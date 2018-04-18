@@ -10,10 +10,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 FileRead, FileContents, %A_ScriptDir%\missions\paths.json
 Paths := JSON.Load(FileContents, true)
 
-TopMissionY = 166
-MissionHeight = 229
-MissionsPerScreen = 4
-
 sclick(x, y) {
   Send {Click %x%, %y%}
 }
@@ -24,7 +20,7 @@ ToSpace(){
 }
 
 Next(){
-  sclick(1710, 1020) ; click Next button
+  sclick(1590, 920) ; click Next button
 }
 
 /*
@@ -54,36 +50,76 @@ StartMission() {
 	Sleep, 7000
 }
 
+/*
+Missions selection is two-phase. Step 1 is to
+select a mission group. Step 2 is to select
+a mission within that group.
 
-SelectMission(mission) {
-	global TopMissionY
-	global MissionHeight
-	global MissionsPerScreen
-	global MissionsPerScreen
-	
-	if(mission <= MissionsPerScreen) {
-		sclick(350, TopMissionY + ((mission-1) * MissionHeight + (MissionHeight / 2) + 20))
+The mission argument is a dot-delimited string.
+For example, "3.1"
+*/
+SelectMission(missionPath) {
+	TopMissionY = 141
+	MissionHeight = 170
+	MissionPadding = 40
+	MissionsPerScreen = 4
+
+    ; the mission list appears with the first group
+    ; already expanded, so we'll click it to close it
+
+    sclick(240, 230)
+
+    parts := StrSplit(missionPath, ".")
+    group := parts[1]
+    group += 0
+    item := parts[2]
+    item += 0
+
+    Sleep, 500
+    ; expand the group
+
+   	debug("group:" group)
+    selectItem(group, TopMissionY, MissionHeight, MissionPadding)
+
+    SubMissionTopY := 325
+    SubMissionHeight := 170
+    SubMissionPadding := 13
+
+    ; select a mission within that group
+
+    selectItem(item, SubMissionTopY, SubMissionHeight, SubMissionPadding )
+
+    Sleep, 500
+	Next()
+}
+
+selectItem(item, topOfListY, itemHeight, itemPadding) {
+	MissionsPerScreen = 4
+
+	if(item <= MissionsPerScreen) {
+		debug("item: " item " topOfListY: " topOfListY " itemHeight: " itemHeight " itemPadding: " itemPadding)
+		sclick(250, topOfListY + ((item-1) * (itemHeight + itemPadding)) + (itemHeight / 2))
 		Sleep, 1000
-		Next()
-		Sleep, 100
 	} else {
-		tilesToMove := mission - MissionsPerScreen
-		
+		tilesToMove := item - MissionsPerScreen
+
 		Loop %tilesToMove% {
 			idx := A_Index
-			DragStartY := TopMissionY + (MissionHeight)
-			
-			y = DragStartY - MissionHeight;
-			MouseClickDrag, left, 350, DragStartY, 350, DragStartY - MissionHeight, 50
-			Sleep, 100
+			DragStartY := topOfListY + (itemHeight + itemPadding)
+
+			y := topOfListY
+
+			debug( "DragStartY: " DragStartY " y: " y )
+			MouseClickDrag, left, 240, DragStartY, 240, y, 50
+			Sleep, 500
 		}
 		Sleep, 500
-		SelectMission(mission - tilesToMove)
+		SelectItem(item - tilesToMove, topOfListY, itemHeight, itemPadding)
 	}
 }
 
 Return() {
-	sclick(960,900)	
+	sclick(960,900)
 }
 
 
@@ -472,8 +508,6 @@ debug(string) {
 
 RunMission(planet, mission, nodes, cargo:=0)
 {
-    debug("RunMission: " %mission%)
-
     global Paths
     Loop {
     		ToSpace()

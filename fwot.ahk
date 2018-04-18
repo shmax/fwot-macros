@@ -20,29 +20,32 @@ Exit the script entirely
 */
 
 /*
-Note: you must start this script with "Run as Administrator"
+Note: you must start this script with "Run as Administrator" if you want to farm specific rewards; it needs permission to disconnect and reconnect your wifi. See the README for more details.
+*/
+
+
+
+/*
+  2. Influencer Badges, 4-star badges only
+  To launch: press Ctrl-Shift-d
 */
 ^+d::
-    RunMission("dailyplanet", 8, Paths.dailyplanet.path1)
+    RunMission("dailyplanet", "2.2", Paths.dailyplanet.path2, "4-star-influencer-badge")
     return
 
-^+e::
-    RunMission("dailyplanet", 3
-	, Paths.dailyplanet.path2)
-    return
 
+/*
+  9. Nixonbucks, lvl 80 path.
+  To launch: press Ctrl-Shift-v
+*/
 ^+v::
-    RunMission("dailyplanet", 5, Paths.dailyplanet.path1, "4-star-robot-badge")
+    RunMission("dailyplanet", "9.2", Paths.dailyplanet.path2)
     return
 
 
-^+m::
-    RunMission("corleone5", 14, Paths.corleone5.theheadofthehorse.path1)
-    return
+/*
+You get the idea. Add more commands here if you want.
+*/
 
-^+x::
-    NeedFuel()
-;    CollectNixonBucks()
-    return
 
 Pause::Pause
