@@ -26,20 +26,19 @@ Note: you must start this script with "Run as Administrator" if you want to farm
 
 
 /*
-  2. Influencer Badges, 4-star badges only
+  2. Career Chips, 4-star badges only
   To launch: press Ctrl-Shift-d
 */
 ^+d::
     RunMission("dailyplanet", "2.2", Paths.dailyplanet.path2, "4-star-influencer-badge")
     return
 
-
 /*
   9. Nixonbucks, lvl 80 path.
   To launch: press Ctrl-Shift-v
 */
-^+v::
-    RunMission("dailyplanet", "9.2", Paths.dailyplanet.path2)
+^+B::
+    RunMission("dailyplanet", "2.3", Paths.dailyplanet.path2)
     return
 
 
