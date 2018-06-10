@@ -339,11 +339,6 @@ Battle(pos, nextNodePos) {
 	sclick(1370, 610) ; click middle critter
 
     Sleep, 2000
-	sclick(67, 70) ; click the speed up button
-	Sleep, 100
-
-    sclick(67, 70) ; click the speed up button
-    Sleep, 100
 
 	Fight()
 }
